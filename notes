@@ -1,0 +1,25 @@
+from langgraph.graph import StateGraph, START, END
+from langchain_openai import OpenAI
+from typing import TypedDict, Annotated, Literal
+from dotenv import load_dotenv
+from pydantic import BaseModel, Field
+from langgraph.graph.message import add_messages
+from langchain_core.messages import SystemMessage, HumanMessage, BaseMessage
+from langgraph.checkpoint.memory import MemorySaver
+
+llm = OpenAI(model="gpt-4o-mini")
+
+class gmailState(TypedDict):
+    messages: Annotated[list[BaseMessage], add_messages]
+    recipient: str
+    subject: str
+    body: str
+    confirmed: bool
+
+
+graph=StateGraph(gmailState)
+
+#add node
+
+
+
